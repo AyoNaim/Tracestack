@@ -1,0 +1,29 @@
+// packages/worker/tsconfig.json
+{
+  "extends": "../../tsconfig.json", // Adjust path as needed
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./",
+    "composite": true,
+    "baseUrl": ".",
+    // VERY IMPORTANT FOR NODE.JS/TS-NODE-DEV:
+    "module": "CommonJS",           // Use CommonJS for Node.js modules for simplicity with ts-node-dev
+    "target": "es2020",             // Or es2021/es2022 if your Node.js version supports it
+    "moduleResolution": "node",     // How Node.js resolves modules (standard)
+    "esModuleInterop": true,        // Allows default imports from CommonJS modules (very common fix)
+    "forceConsistentCasingInFileNames": true, // Good practice
+    "skipLibCheck": true,           // Often useful in monorepos to avoid issues with node_modules types
+    // The 'paths' configuration for 'db'
+    "paths": {
+      "db": ["../db"] // Adjust if your db package name is different
+    },
+    // Remove 'allowImportingTsExtensions' if it's there, as we're not using explicit .ts imports now.
+    // If it was implicitly enabled by something, the other settings should take precedence.
+  },
+  "include": ["./**/*.ts"],
+  "exclude": ["node_modules", "dist"],
+  "references": [
+    { "path": "../db" }
+    // Add { "path": "../types" } if you created a shared types package
+  ]
+}

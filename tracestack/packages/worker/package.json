@@ -1,0 +1,19 @@
+{
+  "name": "worker",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.ts",
+  "scripts": {
+    "dev": "ts-node index.ts",
+    "start": "ts-node index.ts"
+  },
+  "dependencies": {
+    "bullmq": "^5.x.x",
+    "ioredis": "^5.x.x",
+    "@prisma/client": "^5.x.x",
+    "ts-node": "^10.9.x",
+    "ts-node-dev": "^2.x.x",
+    "typescript": "^5.x.x",
+    "@tracestack/db": "workspace:*"
+  }
+}

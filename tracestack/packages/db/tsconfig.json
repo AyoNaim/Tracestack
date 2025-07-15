@@ -1,0 +1,22 @@
+// /workspace/Tracestack/tracestack/packages/db/tsconfig.json
+
+{
+  "extends": "../../tsconfig.json", // <-- Adjust path to your monorepo root tsconfig.json
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": ".",
+    "composite": true,
+    "declaration": true, // <-- IMPORTANT: Generates .d.ts files for other packages to use
+    "declarationMap": true,
+    "module": "CommonJS", // Use CommonJS for Node.js modules
+    "target": "es2020",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "noEmit": false
+  },
+  "include": ["."], // Include all files in this directory
+  "exclude": ["node_modules", "dist"]
+}

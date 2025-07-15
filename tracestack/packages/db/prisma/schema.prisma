@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// output   = "../generated/prisma"
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres.gungonybkrcwpvmbkcpe:iwanttwogrand-blackboy2000@aws-0-eu-north-1.pooler.supabase.com:6543/postgres?pgbouncer=true"
+  directUrl = "postgresql://postgres.gungonybkrcwpvmbkcpe:iwanttwogrand-blackboy2000@aws-0-eu-north-1.pooler.supabase.com:5432/postgres"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  teams     TeamUser[]
+}
+
+model Team {
+  id        String   @id @default(cuid())
+  name      String
+  users     TeamUser[]
+  projects  Project[]
+}
+
+model TeamUser {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  team      Team     @relation(fields: [teamId], references: [id])
+  teamId    String
+  role      String
+}
+
+model Project {
+  id          String     @id @default(cuid())
+  name        String
+  team        Team?       @relation(fields: [teamId], references: [id])
+  teamId      String?
+  endpoints   Endpoint[]
+  logs        Log[]
+  incidents   Incident[]
+}
+
+model Endpoint {
+  id        String   @id @default(cuid())
+  url       String
+  project   Project  @relation(fields: [projectId], references: [id])
+  projectId String
+  status    String
+  latency   Float?
+  lastPing  DateTime?
+}
+
+model Log {
+  id        String   @id @default(cuid())
+  message   String
+  level     String
+  meta      Json
+  timestamp DateTime @default(now())
+  project   Project  @relation(fields: [projectId], references: [id])
+  projectId String
+}
+
+model Incident {
+  id        String   @id @default(cuid())
+  project   Project  @relation(fields: [projectId], references: [id])
+  projectId String
+  summary   String
+  startedAt DateTime
+  resolvedAt DateTime?
+}

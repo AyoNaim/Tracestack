@@ -16,7 +16,7 @@ export async function GET(req:NextRequest) {
         logger.info('Backend GET request processed successfully.');
         return NextResponse.json({ message: 'Backend operation successful!' });
     } catch (error) {
-        console.log('an error has occurred')
+        console.log('an error has occurred');
         logger.error('Backend operation failed!', {
             error: error instanceof Error ? error.message : String(error),
             stack: error instanceof Error ? error.stack : undefined,

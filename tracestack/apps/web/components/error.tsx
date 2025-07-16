@@ -28,9 +28,9 @@ export default function ErrorComponent() {
   };
 
   return (
-    <div>
-      <button onClick={handleInfoClick}>Log Info</button>
-      <button onClick={handleErrorClick}>Simulate Error</button>
+    <div className='gap-4 flex'>
+      <button onClick={handleInfoClick} className='bg-red-500 p-10'>Log Info</button>
+      <button onClick={handleErrorClick} className='bg-red-500 p-10'>Simulate Error</button>
     </div>
   );
 }
